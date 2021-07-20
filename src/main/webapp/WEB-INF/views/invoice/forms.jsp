@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -376,49 +377,21 @@
                     </div>
 
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <a href="/invoice/add" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-flag"></i>
-                    </span>
-                                <span class="text">Add New Invoice</span>
-                            </a>
-                            <div>
-
-                            </div>
-                            <br>
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>Invoice ID</th>
-                                    <th>Created Date</th>
-                                    <th>Finish Date</th>
-                                    <th>Invoice Number</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Invoice ID</th>
-                                    <th>Created Date</th>
-                                    <th>Finish Date</th>
-                                    <th>Invoice Number</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <c:forEach items="${invoiceList}" var="invoice">
-                                    <tr>
-                                        <td>${invoice.id}</td>
-                                        <td>${invoice.created}</td>
-                                        <td>${invoice.deadline}</td>
-                                        <td>${invoice.invoiceNumber}</td>
-                                        <td><a href="/invoice/edit/${invoice.id}">Edit</a> <a href="/invoice/delete/${invoice.id}">Delete</a> <a href="/invoice/view/${invoice.id}">View</a></td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
+                        <form:form method="post" modelAttribute="invoice">
+                            <form:input path="created" type="hidden"/><br>
+                            <form:input path="deadline" type="hidden"/><br>
+                            Invoice Number: <form:input path="invoiceNumber"/><br>
+                            <form:errors path="invoiceNumber"/><br>
+                            Writter: <form:select path="recipient">
+                            <form:option value="0">---Choose Writer--</form:option>
+                            <form:options items="${recipientList}" itemLabel="recipientCompany" itemValue="id"/>
+                        </form:select><br>
+                           Customer: <form:select path="sender">
+                            <form:option value="0">---Choose Writer--</form:option>
+                            <form:options items="${senderList}" itemLabel="companyName" itemValue="id"/>
+                        </form:select><br>
+                            <input type="submit">
+                        </form:form>
                     </div>
                 </div>
 

@@ -7,12 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-Dzień Dobry z widoku
+Dzień Dobry z widoku1
 
 <h2><spring:message code="home.welcome"/></h2>
 <table border="1">
@@ -28,8 +29,8 @@ Dzień Dobry z widoku
             <td>${invoice.id}</td>
             <td>${invoice.created}</td>
             <td>${invoice.deadline}</td>
-            <td>${invoice.invoice_number}</td>
-            <td><a href="/book/delete/validation/${book.id}">Delete</a><a href="/form/book/edit/${book.id}">Edit</a></td>
+            <td>${invoice.invoiceNumber}</td>
+<%--            <td><a href="/book/delete/validation/${book.id}">Delete</a><a href="/form/book/edit/${book.id}">Edit</a></td>--%>
                 <%--            <td><a href="/book/delete/${book.id}">Delete</a><a href="/form/book/edit/${book.id}">Edit</a></td>--%>
         </tr>
 

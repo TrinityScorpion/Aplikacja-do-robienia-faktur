@@ -1,122 +1,96 @@
 package com.example.CodersLabLastProject;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.spire.pdf.PdfDocument;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.*;
+import org.hibernate.sql.Update;
 
-import com.spire.pdf.exporting.xps.schema.Table;
-import com.spire.pdf.exporting.xps.schema.TableRow;
-import com.spire.pdf.tables.PdfTable;
-import lombok.Data;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-
-import com.spire.data.table.DataTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-
-import javax.swing.text.TableView;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
+import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Invoice {
 
-    public static void main(String[] args) {
-        try {
-            Document document = new Document();
-            String dest = "C:/itextExamples/addingTable.pdf";
-            XWPFDocument doc = new XWPFDocument();
-            FileOutputStream out = new FileOutputStream("Invoice-Template.docx");
-            XWPFTable table = doc.createTable();
-            XWPFTable table1 = doc.createTable();
+    public static void main(String[] args) throws IOException {
+        String fileName = "test.docx";
 
-            XWPFTableRow tableRowOne = table.getRow(0);
-//            tableRowOne.getCell(0).setText("Invoice");
-//            tableRowOne.addNewTableCell().setText("col two, row one");
-//            tableRowOne.addNewTableCell().setText("col three, row one");
-//            tableRowOne.addNewTableCell().setText("X");
-//            tableRowOne.setHeight(1000);
-//
-//            //create second row
-//            XWPFTableRow tableRowTwo = table.createRow();
-//            tableRowTwo.getCell(0).setText("col one, row two");
-//            tableRowTwo.getCell(1).setText("col two, row two");
-//            tableRowTwo.getCell(2).setText("col three, row two");
-//            tableRowTwo.getCell(3).setText("col three, row two");
-//            //create third row
-//            XWPFTableRow tableRowThree = table.createRow();
-//            tableRowThree.getCell(0).setText("col one, row three");
-//            tableRowThree.getCell(1).setText("col two, row three");
-//            tableRowThree.getCell(2).setText("col three, row three");
-//            tableRowThree.getCell(3).setText("col three, row three");
-//
-//            XWPFTableRow tableRowFour = table.createRow();
-//            tableRowFour.getCell(0).setText("col one, row three");
-//            tableRowFour.getCell(1).setText("col two, row three");
-//            tableRowFour.getCell(2).setText("col three, row three");
-//            tableRowFour.getCell(3).setText("col three, row three");
-//
-//
-//            //Table 2
-//            XWPFTableRow tableRowOne1 = table1.getRow(0);
-//            tableRowOne1.getCell(0).setText("Invoice");
-//            tableRowOne1.addNewTableCell().setText("col two, row one");
-//            tableRowOne1.addNewTableCell().setText("col three, row one");
-//            tableRowOne1.addNewTableCell().setText("X");
-//            tableRowOne1.setHeight(1000);
-//
-//            //create second row
-//            XWPFTableRow tableRowTwo1 = table1.createRow();
-//            tableRowTwo1.getCell(0).setText("col one, row two");
-//            tableRowTwo1.getCell(1).setText("col two, row two");
-//            tableRowTwo1.getCell(2).setText("col three, row two");
-//            tableRowTwo1.getCell(3).setText("col three, row two");
-//            //create third row
-//            XWPFTableRow tableRowThree1 = table1.createRow();
-//            tableRowThree1.getCell(0).setText("col one, row three");
-//            tableRowThree1.getCell(1).setText("col two, row three");
-//            tableRowThree1.getCell(2).setText("col three, row three");
-//            tableRowThree1.getCell(3).setText("col three, row three");
-//
-//            XWPFTableRow tableRowFour1 = table1.createRow();
-//            tableRowFour1.getCell(0).setText("col one, row three");
-//            tableRowFour1.getCell(1).setText("col two, row three");
-//            tableRowFour1.getCell(2).setText("col three, row three");
-//            tableRowFour1.getCell(3).setText("col three, row three");
-//
-//            doc.write(out);
-//            out.close();
-            System.out.println("create_table.docx written successully");
+        XWPFDocument document = new XWPFDocument();
+        XWPFParagraph p1 = document.createParagraph();
+        p1.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun r1 = p1.createRun();
+        r1.setBold(true);
+        r1.setItalic(true);
+        r1.setFontSize(22);
+        r1.setFontFamily("New Roman");
+        r1.setText("I am first Paragraph");
+
+        XWPFParagraph p2 = document.createParagraph();
+        p2.setAlignment(ParagraphAlignment.LEFT);
+        XWPFRun r2 = p2.createRun();
+        r2.setText("I am second Paragraph");
+        r2.setColor("ff0000");
 
 
+        String fileName1 = "Invoice-Template.docx";
 
-//            Document document = new Document();
-//			PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
-//            PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
-//            document.open();
-//            Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-//            Chunk chunk1 = new Chunk("Hello World1", font);
-//            Chunk chunk2 = new Chunk("Hello World2", font);
-//            document.add(chunk1);
-//            document.add(chunk2);
-//            document.close();
-            System.out.println("Done");
-        }  catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        XWPFDocument doc = new XWPFDocument(
+                Files.newInputStream(Paths.get(fileName1)));
+
+        XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);
+        String docText = xwpfWordExtractor.getText();
+//        System.out.println(docText);
+
+        //   find number of words in the document
+        long count = Arrays.stream(docText.split("\\s+")).count();
+//        System.out.println("Total words: " + count);
+
+        List<XWPFParagraph> list = doc.getParagraphs();
+        for (XWPFParagraph paragraph : list) {
+//            System.out.println(paragraph.getText());
         }
+
+        Invoice invoice = new Invoice();
+
+        invoice.updateDocument("Invoice-Template.docx", "test3.docx", "Ada Gwozdzik", "${name}");
 
     }
 
+    private static void updateDocument(String input, String output, String name, String swap) throws IOException {
+
+        XWPFDocument doc = new XWPFDocument(
+                Files.newInputStream(Paths.get(input)));
+
+        for (XWPFTable tbl : doc.getTables()) {
+            for (XWPFTableRow row : tbl.getRows()) {
+                for (XWPFTableCell cell : row.getTableCells()) {
+                    for (XWPFParagraph p : cell.getParagraphs()) {
+                        for (XWPFRun r : p.getRuns()) {
+                            String text = r.getText(0);
+                            if (text != null && text.contains(swap)) {
+                                text = text.replace(swap, name);
+                                r.setText(text,0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // save the docs
+        try (FileOutputStream out = new FileOutputStream(output)) {
+            doc.write(out);
+        }
+
+
+    }
+
+
 }
+
+
+
+
+

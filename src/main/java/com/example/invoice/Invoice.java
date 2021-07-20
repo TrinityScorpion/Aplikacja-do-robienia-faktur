@@ -1,8 +1,11 @@
 package com.example.invoice;
 
+import com.example.recipient.Recipient;
+import com.example.sender.Sender;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity
@@ -19,11 +22,15 @@ public class Invoice {
     @Column(length = 100)
     private String invoiceNumber;
 
-    @NotBlank(message = "created.notBlank.message")
     private LocalDate created;
 
-    @NotBlank(message = "deadline.notBlank.message")
     private LocalDate deadline;
+
+    @ManyToOne
+    private Recipient recipient;
+
+    @ManyToOne
+    private Sender sender;
 
 
 
