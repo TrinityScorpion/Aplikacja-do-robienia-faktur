@@ -377,11 +377,23 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="/invoice/add" class="btn btn-primary btn-icon-split">
+                            <a href="/invoice/add" class="btn btn-primary btn-icon-split" style="background-color: green">
                     <span class="icon text-white-50">
                       <i class="fas fa-flag"></i>
                     </span>
                                 <span class="text">Add New Invoice</span>
+                            </a>
+                            <a href="/recipient/add" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+                                <span class="text">Add New Recipient</span>
+                            </a>
+                            <a href="/sender/add" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+                                <span class="text">Add New Sender</span>
                             </a>
                             <div>
 
@@ -392,7 +404,7 @@
                                 <tr>
                                     <th>Invoice ID</th>
                                     <th>Created Date</th>
-                                    <th>Finish Date</th>
+                                    <th>Description</th>
                                     <th>Invoice Number</th>
                                     <th>Action</th>
                                 </tr>
@@ -401,7 +413,7 @@
                                 <tr>
                                     <th>Invoice ID</th>
                                     <th>Created Date</th>
-                                    <th>Finish Date</th>
+                                    <th>Description</th>
                                     <th>Invoice Number</th>
                                     <th>Action</th>
                                 </tr>
@@ -411,7 +423,7 @@
                                     <tr>
                                         <td>${invoice.id}</td>
                                         <td>${invoice.created}</td>
-                                        <td>${invoice.deadline}</td>
+                                        <td>${invoice.description}</td>
                                         <td>${invoice.invoiceNumber}</td>
                                         <td><a href="/invoice/edit/${invoice.id}">Edit</a> <a href="/invoice/delete/${invoice.id}">Delete</a> <a href="/invoice/view/${invoice.id}">View</a></td>
                                     </tr>

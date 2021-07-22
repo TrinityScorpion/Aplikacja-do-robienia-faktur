@@ -1,5 +1,6 @@
-package com.example.recipient;
+package com.example.sender;
 
+import com.example.recipient.Recipient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,30 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/recipient")
 @RequiredArgsConstructor
-public class RecipientController {
+@RequestMapping("/sender")
+public class SenderController {
 
-    private final RecipientService recipientService;
-
-    @GetMapping("/all")
-    public String getAll(Model model){
-         model.addAttribute("recipientList", recipientService.getAll());
-         return "";
-    }
+    private final SenderService senderService;
 
     @GetMapping("/add")
     public String add(Model model){
-        model.addAttribute("recipient", new Recipient());
-        return "/recipient/forms";
+        model.addAttribute("sender", new Sender());
+        return "/sender/forms";
     }
 
     @PostMapping("/add")
-    public String add(@Valid Recipient recipient, BindingResult result){
+    public String add(@Valid Sender sender, BindingResult result){
         if(result.hasErrors()){
-            return "/recipient/forms";
+            return "/sender/forms";
         }
-        recipientService.saveRecipient(recipient);
+        senderService.saveSender(sender);
         return "redirect:/invoice/all";
     }
 

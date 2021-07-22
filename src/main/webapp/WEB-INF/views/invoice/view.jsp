@@ -372,74 +372,183 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
 
-                        <h6 class="m-0 font-weight-bold text-primary">Invoices List</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Invoice Details</h6>
                     </div>
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="/invoice/add" class="btn btn-primary btn-icon-split">
+                            <a href="/invoice/all" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-flag"></i>
                     </span>
-                                <span class="text">Add New Invoice</span>
+                                <span class="text">Back</span>
+                            </a>
+                            <a href="/invoice/save" class="btn btn-primary btn-icon-split style="background-color: red""
+                               style="background-color: red">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+                                <span class="text">Save as PDF File</span>
+                            </a>
+                            </a>
+                            <a href="/invoice/email" class="btn btn-primary btn-icon-split style="background-color: red""
+                               style="background-color: red">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+                                <span class="text">Send to email</span>
                             </a>
                             <div>
 
                             </div>
                             <br>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <colgroup>
+                                    <col style="width: 100px">
+                                    <col style="width: 40px">
+                                    <col style="width: 40px">
+                                    <col style="width: 40px">
+                                </colgroup>
                                 <thead>
                                 <tr>
-                                    <th>Invoice ID</th>
-                                    <th>Created Date</th>
-                                    <th>Finish Date</th>
-                                    <th>Invoice Number</th>
-                                    <th>Action</th>
+                                    <th>Invoice</th>
+                                    <th></th>
+                                    <th>Description</th>
+                                    <th>Details</th>
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Invoice ID</th>
-                                    <th>Created Date</th>
-                                    <th>Finish Date</th>
-                                    <th>Invoice Number</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
                                 <tbody>
-                                <c:forEach items="${invoiceList}" var="invoice">
-                                    <tr>
-                                        <td>${invoice.id}</td>
-                                        <td>${invoice.created}</td>
-                                        <td>${invoice.deadline}</td>
-                                        <td>${invoice.invoiceNumber}</td>
-                                        <td><a href="/invoice/edit/${invoice.id}">Edit</a> <a href="/invoice/delete/${invoice.id}">Delete</a> <a href="/invoice/view/${invoice.id}">View</a></td>
-                                    </tr>
-                                </c:forEach>
+
+                                <tr>
+                                    <td>"${recipientCompany} / ${recipientName}"</td>
+                                    <td></td>
+                                    <td>Invoice No.</td>
+                                    <td>${tableViewNumber}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>${recipientCity}</td>
+                                    <td></td>
+                                    <td>Date</td>
+                                    <td>${tableViewCreated}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>${recipientCountry}</td>
+                                    <td></td>
+                                    <td>Pay Date</td>
+                                    <td>${tableViewDeadline}</td>
+                                </tr>
+
                                 </tbody>
                             </table>
+                            <div>
+
+                            </div>
+                            <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                                <colgroup>
+                                    <col style="width: 50px">
+                                    <col style="width: 50px">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>Bill To.</th>
+                                    <th>Ship To.</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>${senderCompany}</td>
+                                    <td>${senderName}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>${senderAdres}</td>
+                                    <td>${senderAdres}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>${senderCity}</td>
+                                    <td>${senderCity}</td>
+                                </tr>
+                                <tr>
+                                    <td>${senderCountry}</td>
+                                    <td>${senderCountry}</td>
+                                </tr>
+                                <tr>
+                                    <td>${senderPhone}</td>
+                                    <td>---</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
                         </div>
+                        <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                            <colgroup>
+                                <col style="width: 50px">
+                                <col style="width: 50px">
+                                <col style="width: 50px">
+                                <col style="width: 50px">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>${tableViewDescription}</td>
+                                <td>${tableViewQuantity}</td>
+                                <td>${tableViewSalary}</td>
+                                <td>${tableViewSum}</td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Tax Rate:</td>
+                                <td>${tableViewTax}%</td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Tax Total:</td>
+                                <td>${tableViewTotalTax}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Total Gross:</td>
+                                <td>${tableViewTotalMoney}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2019</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2019</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->

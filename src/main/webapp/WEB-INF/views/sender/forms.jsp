@@ -377,26 +377,19 @@
                     </div>
 
                     <div class="card-body">
-                        <form:form method="post" modelAttribute="invoice">
-                            <form:input path="created" type="hidden"/><br>
-                            <form:input path="deadline" type="hidden"/><br>
-                            <form:input path="invoiceNumber" type="hidden"/><br>
-                            Salary: <form:input path="salary"/><br>
-                            <form:errors path="salary"/><br>
-                            Quantity: <form:input path="quantity"/><br>
-                            <form:errors path="quantity"/><br>
-                            Tax: <form:input path="tax"/>%<br>
-                            <form:errors path="tax"/><br>
-                            Description: <form:input path="description"/><br>
-                            <form:errors path="description"/><br>
-                            From: <form:select path="recipient">
-                            <form:option value="0">---Choose Writer--</form:option>
-                            <form:options items="${recipientList}" itemLabel="recipientCompany" itemValue="id"/>
-                        </form:select><br>
-                           To: <form:select path="sender">
-                            <form:option value="0">---Choose Sender--</form:option>
-                            <form:options items="${senderList}" itemLabel="companyName" itemValue="id"/>
-                        </form:select><br>
+                        <form:form method="post" modelAttribute="sender">
+                            Owner: <form:input path="ownerName"/><br>
+                            <form:errors path="ownerName"/><br>
+                            Company: <form:input path="companyName"/><br>
+                            <form:errors path="companyName"/><br>
+                            Adres: <form:input path="companyAdress"/><br>
+                            <form:errors path="companyAdress"/><br>
+                            City: <form:input path="city"/><br>
+                            <form:errors path="city"/><br>
+                            Country: <form:input path="country"/><br>
+                            <form:errors path="country"/><br>
+                            Phone: <form:input path="companyPhone"/><br>
+                            <form:errors path="companyPhone"/><br>
                             <input type="submit">
                         </form:form>
                     </div>

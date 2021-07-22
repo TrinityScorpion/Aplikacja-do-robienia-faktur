@@ -18,13 +18,21 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "invoiceNumber.notBlank.message")
+//    @NotBlank(message = "invoiceNumber.notBlank.message")
     @Column(length = 100)
     private String invoiceNumber;
 
     private LocalDate created;
 
     private LocalDate deadline;
+
+    private int salary;
+
+    private int quantity;
+
+    private int tax;
+
+    private String description;
 
     @ManyToOne
     private Recipient recipient;

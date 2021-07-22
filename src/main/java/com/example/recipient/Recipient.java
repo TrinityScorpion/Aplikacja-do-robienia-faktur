@@ -28,4 +28,8 @@ public class Recipient {
     @NotBlank(message = "recipientCity.notBlank.message")
     @Column(length = 100)
     private String recipientCity;
+
+    @NotBlank(message = "recipientCountry.notBlank.message")
+    @Column(length = 100)
+    private String recipientCountry;
 }
