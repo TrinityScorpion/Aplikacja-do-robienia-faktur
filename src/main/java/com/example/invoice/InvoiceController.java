@@ -101,31 +101,11 @@ public class InvoiceController {
         double tax = sum * (invoice.getTax() / 100.0);
         double total = sum + tax;
         //-------Invoice---------//
-        model.addAttribute("tableViewNumber", invoice.getInvoiceNumber());
-        model.addAttribute("tableViewCreated", invoice.getCreated());
-        model.addAttribute("tableViewDeadline", invoice.getDeadline());
-
-        model.addAttribute("tableViewSalary", invoice.getSalary());
-        model.addAttribute("tableViewQuantity", invoice.getQuantity());
-        model.addAttribute("tableViewTax", invoice.getTax());
+        model.addAttribute("invoiceObject", invoice);
         model.addAttribute("tableViewTotalTax", tax);
         model.addAttribute("tableViewTotalMoney", total);
-        model.addAttribute("tableViewDescription", invoice.getDescription());
         model.addAttribute("tableViewSum", sum);
 
-        //-------Recipient--------//
-        model.addAttribute("recipientCompany", invoice.getRecipient().getRecipientCompany());
-        model.addAttribute("recipientName", invoice.getRecipient().getRecipientName());
-        model.addAttribute("recipientCity", invoice.getRecipient().getRecipientCity());
-        model.addAttribute("recipientCountry", invoice.getRecipient().getRecipientCountry());
-
-        //-------Sender--------//
-        model.addAttribute("senderName", invoice.getSender().getOwnerName());
-        model.addAttribute("senderCompany", invoice.getSender().getCompanyName());
-        model.addAttribute("senderAdres", invoice.getSender().getCompanyAdress());
-        model.addAttribute("senderCity", invoice.getSender().getCity());
-        model.addAttribute("senderCountry", invoice.getSender().getCountry());
-        model.addAttribute("senderPhone", invoice.getSender().getCompanyPhone());
 
         //-------File Replacer--------//
         FileInvoice fileInvoice = new FileInvoice();

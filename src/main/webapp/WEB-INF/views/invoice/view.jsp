@@ -420,24 +420,24 @@
                                 <tbody>
 
                                 <tr>
-                                    <td>"${recipientCompany} / ${recipientName}"</td>
+                                    <td>"${invoiceObject.recipient.recipientCompany} / ${invoiceObject.recipient.recipientName}"</td>
                                     <td></td>
                                     <td>Invoice No.</td>
-                                    <td>${tableViewNumber}</td>
+                                    <td>${invoiceObject.invoiceNumber}</td>
 
                                 </tr>
                                 <tr>
-                                    <td>${recipientCity}</td>
+                                    <td>${invoiceObject.recipient.recipientCity}</td>
                                     <td></td>
                                     <td>Date</td>
-                                    <td>${tableViewCreated}</td>
+                                    <td>${invoiceObject.created}</td>
 
                                 </tr>
                                 <tr>
-                                    <td>${recipientCountry}</td>
+                                    <td>${invoiceObject.recipient.recipientCountry}</td>
                                     <td></td>
                                     <td>Pay Date</td>
-                                    <td>${tableViewDeadline}</td>
+                                    <td>${invoiceObject.deadline}</td>
                                 </tr>
 
                                 </tbody>
@@ -458,25 +458,25 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>${senderCompany}</td>
-                                    <td>${senderName}</td>
+                                    <td>${invoiceObject.sender.companyName}</td>
+                                    <td>${invoiceObject.sender.ownerName}</td>
 
                                 </tr>
                                 <tr>
-                                    <td>${senderAdres}</td>
-                                    <td>${senderAdres}</td>
+                                    <td>${invoiceObject.sender.companyAdress}</td>
+                                    <td>${invoiceObject.sender.companyAdress}</td>
 
                                 </tr>
                                 <tr>
-                                    <td>${senderCity}</td>
-                                    <td>${senderCity}</td>
+                                    <td>${invoiceObject.sender.city}</td>
+                                    <td>${invoiceObject.sender.city}</td>
                                 </tr>
                                 <tr>
-                                    <td>${senderCountry}</td>
-                                    <td>${senderCountry}</td>
+                                    <td>${invoiceObject.sender.country}</td>
+                                    <td>${invoiceObject.sender.country}</td>
                                 </tr>
                                 <tr>
-                                    <td>${senderPhone}</td>
+                                    <td>${invoiceObject.sender.companyPhone}</td>
                                     <td>---</td>
                                 </tr>
                                 </tbody>
@@ -500,9 +500,9 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>${tableViewDescription}</td>
-                                <td>${tableViewQuantity}</td>
-                                <td>${tableViewSalary}</td>
+                                <td>${invoiceObject.description}</td>
+                                <td>${invoiceObject.quantity}</td>
+                                <td>${invoiceObject.salary}</td>
                                 <td>${tableViewSum}</td>
 
                             </tr>
@@ -510,7 +510,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>Tax Rate:</td>
-                                <td>${tableViewTax}%</td>
+                                <td>${invoiceObject.tax}%</td>
 
                             </tr>
                             <tr>
