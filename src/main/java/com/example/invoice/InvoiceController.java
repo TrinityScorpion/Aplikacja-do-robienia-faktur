@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -43,14 +44,18 @@ public class InvoiceController {
 
 
     @GetMapping("/all")
-    public String getAll(Model model) {
+    public String getAll(Model model, Principal principal) {
+        String username = principal.getName();
+        model.addAttribute("username", username);
         model.addAttribute("invoiceList", invoiceService.getAll());
         return "/invoice/list";
     }
 
     @GetMapping("/add")
-    public String add(Model model) {
+    public String add(Model model, Principal principal) {
         Invoice invoice = new com.example.invoice.Invoice();
+        String username = principal.getName();
+        model.addAttribute("username", username);
         model.addAttribute("invoice", invoice);
         return "/invoice/forms";
     }
@@ -95,7 +100,9 @@ public class InvoiceController {
     }
 
     @GetMapping("/view/{id}")
-    public String view(@PathVariable long id, Model model) throws IOException {
+    public String view(@PathVariable long id, Model model, Principal principal) throws IOException {
+        String username = principal.getName();
+        model.addAttribute("username", username);
         Invoice invoice = invoiceService.findById(id);
         double sum = invoice.getQuantity() * invoice.getSalary();
         double tax = sum * (invoice.getTax() / 100.0);

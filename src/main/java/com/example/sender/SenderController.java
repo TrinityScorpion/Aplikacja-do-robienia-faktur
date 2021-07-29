@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +20,9 @@ public class SenderController {
     private final SenderService senderService;
 
     @GetMapping("/add")
-    public String add(Model model){
+    public String add(Model model, Principal principal){
+        String username = principal.getName();
+        model.addAttribute("username", username);
         model.addAttribute("sender", new Sender());
         return "/sender/forms";
     }

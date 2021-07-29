@@ -3,8 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -333,14 +331,8 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">${username}</span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                            <sec:authorize access="isAuthenticated()">
-                                <form action="<c:url value="/logout"/>" method="post">
-                                    <input class="fa fa-id-badge" type="submit" value="Wyloguj">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                </form>
-                            </sec:authorize>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -374,31 +366,21 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                <h1 class="h3 mb-2 text-gray-800">Registration</h1>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
 
-                        <h6 class="m-0 font-weight-bold text-primary">Invoices List</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Register new User</h6>
                     </div>
-
-                    <div class="card-body">
-                        <form:form method="post" modelAttribute="sender">
-                            Owner: <form:input path="ownerName"/><br>
-                            <form:errors path="ownerName"/><br>
-                            Company: <form:input path="companyName"/><br>
-                            <form:errors path="companyName"/><br>
-                            Adres: <form:input path="companyAdress"/><br>
-                            <form:errors path="companyAdress"/><br>
-                            City: <form:input path="city"/><br>
-                            <form:errors path="city"/><br>
-                            Country: <form:input path="country"/><br>
-                            <form:errors path="country"/><br>
-                            Phone: <form:input path="companyPhone"/><br>
-                            <form:errors path="companyPhone"/><br>
-                            <input type="submit">
-                        </form:form>
+                    <form:form method="post" modelAttribute="user">
+                        <div><label> User Name : <form:input path="username"/> </label></div>
+                        <div><label> Password: <form:input path="password"/> </label></div>
+                                                <form:input path="enabled" type="hidden"/>
+                        <div><input type="submit" value="Sign In"/></div>
+                        ---------------------------------
+                    </form:form>
                     </div>
                 </div>
 

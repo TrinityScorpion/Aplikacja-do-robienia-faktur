@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/recipient")
@@ -24,7 +25,9 @@ public class RecipientController {
     }
 
     @GetMapping("/add")
-    public String add(Model model){
+    public String add(Model model, Principal principal){
+        String username = principal.getName();
+        model.addAttribute("username", username);
         model.addAttribute("recipient", new Recipient());
         return "/recipient/forms";
     }

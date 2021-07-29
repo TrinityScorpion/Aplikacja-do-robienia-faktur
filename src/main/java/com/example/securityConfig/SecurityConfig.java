@@ -15,22 +15,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user1").password("{noop}user123").roles("USER")
-//                .and()
-//                .withUser("admin1").password("{noop}admin123").roles("ADMIN");
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/invoice/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN")
                 .antMatchers("/about/**").hasAnyRole("USER", "ADMIN")
-                .and().formLogin().loginPage("/login1")
-                .and().logout().logoutSuccessUrl("/")
+                .and().formLogin().loginPage("/user/login").defaultSuccessUrl("/invoice/all")
+                .and().logout().logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true).logoutSuccessUrl("/home")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403");
     }
