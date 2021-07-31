@@ -376,7 +376,7 @@
                     </div>
                     <form:form method="post" modelAttribute="user">
                         <div><label> User Name : <form:input path="username"/> </label></div>
-                        <div><label> Password: <form:input path="password"/> </label></div>
+                        <div><label> Password: <form:input path="password" type="password"/> </label></div>
                                                 <form:input path="enabled" type="hidden"/>
                         <div><input type="submit" value="Sign In"/></div>
                         ---------------------------------

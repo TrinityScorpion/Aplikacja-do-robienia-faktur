@@ -2,9 +2,25 @@ package com.example.CodersLabLastProject;
 
 import org.apache.poi.xwpf.usermodel.*;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 
 public class FileInvoice {
+
+    public static void main(String[] args) {
+        JFrame parentFrame = new JFrame();
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+
+        int userSelection = fileChooser.showSaveDialog(parentFrame);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+        }
+    }
 
     public void updateDocument(XWPFDocument doc, String name, String swap) throws IOException {
 

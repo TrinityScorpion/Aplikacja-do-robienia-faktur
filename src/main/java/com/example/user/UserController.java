@@ -47,7 +47,7 @@ public class UserController {
         user.setEnabled(1);
         System.out.println(result);
         userService.saveUser(user);
-        return "redirect:/invoice/all";
+        return "redirect:/home";
     }
 
     @GetMapping("/admin")

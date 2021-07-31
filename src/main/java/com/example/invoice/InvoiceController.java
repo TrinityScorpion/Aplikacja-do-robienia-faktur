@@ -2,20 +2,27 @@ package com.example.invoice;
 
 
 import com.example.CodersLabLastProject.FileInvoice;
+import com.example.email.UserEmailService;
 import com.example.recipient.Recipient;
 import com.example.recipient.RecipientService;
 import com.example.sender.Sender;
 import com.example.sender.SenderService;
+import com.example.user.User;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.*;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 import javax.validation.Valid;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Principal;
@@ -31,6 +38,7 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
     private final RecipientService recipientService;
     private final SenderService senderService;
+    private final UserEmailService userEmailService;
 
     @ModelAttribute("recipientList")
     public List<Recipient> getRecipients() {
@@ -115,21 +123,20 @@ public class InvoiceController {
 
 
         //-------File Replacer--------//
-        FileInvoice fileInvoice = new FileInvoice();
         String input = "Invoice-Template.docx";
         String output = "test3.docx";
         XWPFDocument doc = new XWPFDocument(
                 Files.newInputStream(Paths.get(input)));
-
+        FileInvoice fileInvoice = new FileInvoice();
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCompany(), "${company}");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCity(), "${city}");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCountry(), "${country}");
 
         fileInvoice.updateDocument(doc, invoice.getInvoiceNumber(), "${invoiceN}");
-        fileInvoice.updateDocument(doc, invoice.getCreated()+"", "${created}");
-        fileInvoice.updateDocument(doc, invoice.getDeadline()+"", "${deadline}");
+        fileInvoice.updateDocument(doc, invoice.getCreated() + "", "${created}");
+        fileInvoice.updateDocument(doc, invoice.getDeadline() + "", "${deadline}");
 
-        fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName()+" / "+invoice.getSender().getOwnerName(), "${companyName}");
+        fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName() + " / " + invoice.getSender().getOwnerName(), "${companyName}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyAdress(), "${companyAdress}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCity(), "${companyCity}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCountry(), "${companyCountry}");
@@ -138,12 +145,12 @@ public class InvoiceController {
         fileInvoice.updateDocument(doc, invoice.getSender().getOwnerName(), "${ownerName}");
 
         fileInvoice.updateDocument(doc, invoice.getDescription(), "${description}");
-        fileInvoice.updateDocument(doc, invoice.getQuantity()+"", "${quan}");
-        fileInvoice.updateDocument(doc, invoice.getSalary()+"", "${salary}");
-        fileInvoice.updateDocument(doc, sum+"", "${sum}");
-        fileInvoice.updateDocument(doc, invoice.getTax()+"", "${taxR}");
-        fileInvoice.updateDocument(doc, tax+"", "${taxT}");
-        fileInvoice.updateDocument(doc, total+"", "${Total}");
+        fileInvoice.updateDocument(doc, invoice.getQuantity() + "", "${quan}");
+        fileInvoice.updateDocument(doc, invoice.getSalary() + "", "${salary}");
+        fileInvoice.updateDocument(doc, sum + "", "${sum}");
+        fileInvoice.updateDocument(doc, invoice.getTax() + "", "${taxR}");
+        fileInvoice.updateDocument(doc, tax + "", "${taxT}");
+        fileInvoice.updateDocument(doc, total + "", "${Total}");
 
         try (FileOutputStream out = new FileOutputStream(output)) {
             doc.write(out);
@@ -151,14 +158,40 @@ public class InvoiceController {
         return "/invoice/view";
     }
 
-
     @GetMapping("/email")
-    public static String email() throws IOException {
-
+    public String email(User user, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+       userEmailService.register(user, getSiteURL(request));
 
         return "redirect:/invoice/all";
     }
 
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    }
+
+    @GetMapping("/save")
+    public String save(){
+        try{
+            JFrame parentFrame = new JFrame();
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Specify a file to save");
+
+            int userSelection = fileChooser.showSaveDialog(parentFrame);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+            }
+        }catch(HeadlessException e){
+            System.out.println(e.getMessage());
+        }catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        return "redirect:/invoice/all";
+    }
 
 }
 
