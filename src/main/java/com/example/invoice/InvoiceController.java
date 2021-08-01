@@ -8,6 +8,8 @@ import com.example.recipient.RecipientService;
 import com.example.sender.Sender;
 import com.example.sender.SenderService;
 import com.example.user.User;
+import com.example.user.UserService;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,6 +25,7 @@ import javax.swing.*;
 import javax.validation.Valid;
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.Principal;
@@ -39,6 +42,7 @@ public class InvoiceController {
     private final RecipientService recipientService;
     private final SenderService senderService;
     private final UserEmailService userEmailService;
+    private final UserService userService;
 
     @ModelAttribute("recipientList")
     public List<Recipient> getRecipients() {
@@ -50,12 +54,22 @@ public class InvoiceController {
         return senderService.getAll();
     }
 
+    @ModelAttribute("userList")
+    public List<User> geUsers() {
+        return invoiceService.getAllUsers();
+    }
+
 
     @GetMapping("/all")
     public String getAll(Model model, Principal principal) {
         String username = principal.getName();
+        String[] getAdmin = userService.findByUserName(principal.getName()).getRoles().toString().split("=");
+        String admin = getAdmin[2].substring(0, 10);
+        System.out.println(admin);
+        model.addAttribute("admin", admin);
         model.addAttribute("username", username);
         model.addAttribute("invoiceList", invoiceService.getAll());
+        model.addAttribute("userId", userService.findByUserName(principal.getName()).getId());
         return "/invoice/list";
     }
 
@@ -69,15 +83,17 @@ public class InvoiceController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid Invoice invoice, BindingResult result) {
+    public String add(@Valid Invoice invoice, BindingResult result, Principal principal) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "/invoice/forms";
         }
+
         Random rand = new Random();
         int number = rand.nextInt(100000);
         invoice.setCreated(LocalDate.now());
         invoice.setDeadline(LocalDate.of(2021, 07, 30));
+        invoice.setUser(userService.findByUserName(principal.getName()));
         String invoiceNumber1 = number + "_" + LocalDate.now().getYear()
                 + LocalDate.now().getMonthValue()
                 + LocalDate.now().getDayOfMonth();
@@ -160,7 +176,7 @@ public class InvoiceController {
 
     @GetMapping("/email")
     public String email(User user, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-       userEmailService.register(user, getSiteURL(request));
+        userEmailService.register(user, getSiteURL(request));
 
         return "redirect:/invoice/all";
     }
@@ -171,8 +187,8 @@ public class InvoiceController {
     }
 
     @GetMapping("/save")
-    public String save(){
-        try{
+    public String save() {
+        try {
             JFrame parentFrame = new JFrame();
 
             JFileChooser fileChooser = new JFileChooser();
@@ -184,9 +200,9 @@ public class InvoiceController {
                 File fileToSave = fileChooser.getSelectedFile();
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
             }
-        }catch(HeadlessException e){
+        } catch (HeadlessException e) {
             System.out.println(e.getMessage());
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
 

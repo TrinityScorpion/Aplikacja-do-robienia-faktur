@@ -1,5 +1,7 @@
 package com.example.invoice;
 
+import com.example.user.User;
+import com.example.user.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InvoiceService {
     private final InvoiceDao invoiceDao;
+    private final UserDao userDao;
 
     public void createInvoice(Invoice invoice){
         invoiceDao.saveInvoice(invoice);
@@ -22,6 +25,9 @@ public class InvoiceService {
 
     public List<Invoice> getAll(){
         return invoiceDao.getAll();
+    }
+    public List<User> getAllUsers(){
+        return userDao.getAll();
     }
 
     public void update(Invoice invoice){

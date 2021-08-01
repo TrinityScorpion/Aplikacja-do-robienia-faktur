@@ -2,6 +2,7 @@ package com.example.invoice;
 
 import com.example.recipient.Recipient;
 import com.example.sender.Sender;
+import com.example.user.User;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -40,7 +41,8 @@ public class Invoice {
     @ManyToOne
     private Sender sender;
 
-
+    @ManyToOne
+    private User user;
 
 
 
