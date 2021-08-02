@@ -20,9 +20,10 @@ public class FileInvoice {
 //            File fileToSave = fileChooser.getSelectedFile();
 //            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 //        }
+
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
-        String fileLocation = path.substring(0, path.length() - 1) + "NoxHoursReport"  + ".xlsx";
+        String fileLocation = path.substring(0, path.length() - 1)+"/src/main/resources/"+ "Invoice-Template.docx";
         System.out.println(fileLocation);
 
 

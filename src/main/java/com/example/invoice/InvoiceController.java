@@ -148,8 +148,12 @@ public class InvoiceController {
 
 
         //-------File Replacer--------//
-        String input = "Invoice-Template.docx";
-        String output = "test3.docx";
+        File currDir = new File(".");
+        String path = currDir.getAbsolutePath();
+        String fileInput = path.substring(0, path.length() - 1)+"/src/main/resources/"+ "Invoice-Template.docx";
+        String input = fileInput;
+        String fileOutput = path.substring(0, path.length() - 1)+"/src/main/resources/"+ "final.docx";
+        String output = fileOutput;
         XWPFDocument doc = new XWPFDocument(
                 Files.newInputStream(Paths.get(input)));
         FileInvoice fileInvoice = new FileInvoice();
