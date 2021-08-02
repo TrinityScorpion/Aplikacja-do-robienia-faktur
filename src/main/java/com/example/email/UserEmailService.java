@@ -59,8 +59,11 @@ public class UserEmailService implements EmailSender{
                 + "Your company name.";
         FileSystemResource file = new FileSystemResource(new File("test3.docx"));
         MimeBodyPart attachmentPart = new MimeBodyPart();
+        File currDir = new File(".");
+        String path = currDir.getAbsolutePath();
+        String fileInput = path.substring(0, path.length() - 1)+"/src/main/resources/"+ "final.docx";
         try {
-            attachmentPart.attachFile(new File("Invoice-Template.docx"));
+            attachmentPart.attachFile(new File(fileInput));
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -112,9 +112,14 @@ public class InvoiceController {
     }
 
     @GetMapping("/block/{id}")
-    public String block(@PathVariable String username) {
-        User user = userServiceImpl.findByUserName(username);
-        user.setEnabled(0);
+    public String block(@PathVariable int id, Model model) {
+       model.addAttribute("userBlock",userServiceImpl.findUserById(id));
+        return "invoice/block";
+    }
+
+    @PostMapping("/block/{id}")
+    public String block(User user) {
+      user.setEnabled(0);
         userServiceImpl.update(user);
         return "redirect:/invoice/all";
     }
@@ -157,6 +162,7 @@ public class InvoiceController {
         XWPFDocument doc = new XWPFDocument(
                 Files.newInputStream(Paths.get(input)));
         FileInvoice fileInvoice = new FileInvoice();
+        fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientName(),"xyz");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCompany(), "${company}");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCity(), "${city}");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCountry(), "${country}");
@@ -167,6 +173,7 @@ public class InvoiceController {
 
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName() + " / " + invoice.getSender().getOwnerName(), "${companyName}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyAdress(), "${companyAdress}");
+        fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName(),"companyName");
         fileInvoice.updateDocument(doc, invoice.getSender().getCity(), "${companyCity}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCountry(), "${companyCountry}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyPhone(), "${companyPhone}");
@@ -180,7 +187,6 @@ public class InvoiceController {
         fileInvoice.updateDocument(doc, invoice.getTax() + "", "${taxR}");
         fileInvoice.updateDocument(doc, tax + "", "${taxT}");
         fileInvoice.updateDocument(doc, total + "", "${Total}");
-
         try (FileOutputStream out = new FileOutputStream(output)) {
             doc.write(out);
         }
@@ -218,7 +224,6 @@ public class InvoiceController {
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
-
         return "redirect:/invoice/all";
     }
 

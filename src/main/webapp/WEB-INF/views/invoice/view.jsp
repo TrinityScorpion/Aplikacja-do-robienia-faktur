@@ -334,13 +334,6 @@
                     </span>
                                 <span class="text">Back</span>
                             </a>
-                            <a href="/invoice/save" class="btn btn-primary btn-icon-split style="background-color: red""
-                               style="background-color: red">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-flag"></i>
-                    </span>
-                                <span class="text">Save as PDF File</span>
-                            </a>
                             </a>
                             <a href="/invoice/email" class="btn btn-primary btn-icon-split style="background-color: red""
                                style="background-color: red">

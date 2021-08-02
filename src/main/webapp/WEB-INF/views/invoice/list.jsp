@@ -267,18 +267,12 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <a href="/invoice/add" class="btn btn-primary btn-icon-split"
+                                <a href="/user/create-user" class="btn btn-primary btn-icon-split"
                                    style="background-color: green">
                     <span class="icon text-white-50">
                       <i class="fas fa-flag"></i>
                     </span>
-                                    <span class="text">Add New Invoice</span>
-                                </a>
-                                <a href="/recipient/add" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-flag"></i>
-                    </span>
-                                    <span class="text">Add New Recipient</span>
+                                    <span class="text">Add New User</span>
                                 </a>
                                 <a href="/sender/add" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
@@ -318,7 +312,7 @@
                                                 <td>${user.roles}</td>
                                                 <td><a href="/invoice/edit/${user.id}">Edit</a> <a
                                                         href="/invoice/delete/${user.id}">Delete</a> <a
-                                                        href="/invoice/block/${user.username}">Block User</a></td>
+                                                        href="/invoice/block/${user.id}">Block User</a></td>
 
                                             </tr>
                                     </c:forEach>

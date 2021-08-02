@@ -32,9 +32,6 @@ public class UserController {
     public String createUser(Model model){
         User user = new User();
         model.addAttribute("user", user);
-//        user.setUsername("maniek");
-//        user.setPassword("maniek");
-//        userService.saveUser(user);
         return "invoice/register";
     }
 
@@ -44,14 +41,13 @@ public class UserController {
             System.out.println(result);
             return "invoice/register";
         }
-//        if(!user.getPassword().equals(password1)){
-//            System.out.println("Rozne hasla");
-//            return "invoice/register";
-//        }
-        user.setEnabled(1);
-        System.out.println(result);
-        userService.saveUser(user);
-        return "redirect:/home";
+        if(user.getPassword().equals(user.getConfirmPassword())){
+            user.setEnabled(1);
+            userService.saveUser(user);
+        }else{
+            System.out.println("Password are not equals");
+        }
+        return "redirect:/user/create-user";
     }
 
     @GetMapping("/admin")
