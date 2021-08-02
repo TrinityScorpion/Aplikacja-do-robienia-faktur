@@ -57,7 +57,7 @@ public class UserEmailService implements EmailSender{
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
                 + "Thank you,<br>"
                 + "Your company name.";
-        FileSystemResource file = new FileSystemResource(new File("Invoice-Template.docx"));
+        FileSystemResource file = new FileSystemResource(new File("test3.docx"));
         MimeBodyPart attachmentPart = new MimeBodyPart();
         try {
             attachmentPart.attachFile(new File("Invoice-Template.docx"));
@@ -78,7 +78,7 @@ public class UserEmailService implements EmailSender{
         multipart.addBodyPart(attachmentPart);
         message.setContent(multipart);
 
-        helper.addAttachment("Invoice-Template.docx", file);
+        helper.addAttachment("test3.docx", file);
         content = content.replace("[[name]]", user.getUsername());
         String verifyURL = siteURL + "/verify?code=" + user.getPassword();
         content = content.replace("[[URL]]", verifyURL);

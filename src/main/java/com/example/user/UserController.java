@@ -44,6 +44,10 @@ public class UserController {
             System.out.println(result);
             return "invoice/register";
         }
+//        if(!user.getPassword().equals(password1)){
+//            System.out.println("Rozne hasla");
+//            return "invoice/register";
+//        }
         user.setEnabled(1);
         System.out.println(result);
         userService.saveUser(user);

@@ -3,6 +3,7 @@ package com.example.user;
 import com.example.role.Role;
 import com.example.role.RoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserDao userDao;
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
@@ -39,4 +41,19 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    public User findById(long id) {
+        return userDao.findById(id);
+    }
+
+    public List<User> getAll() {
+        return userDao.getAll();
+    }
+
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    public void delete(long id) {
+        userDao.delete(id);
+    }
 }

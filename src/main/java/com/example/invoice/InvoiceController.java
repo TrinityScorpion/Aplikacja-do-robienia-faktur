@@ -9,6 +9,7 @@ import com.example.sender.Sender;
 import com.example.sender.SenderService;
 import com.example.user.User;
 import com.example.user.UserService;
+import com.example.user.UserServiceImpl;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.*;
@@ -43,6 +44,7 @@ public class InvoiceController {
     private final SenderService senderService;
     private final UserEmailService userEmailService;
     private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
     @ModelAttribute("recipientList")
     public List<Recipient> getRecipients() {
@@ -104,9 +106,16 @@ public class InvoiceController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        com.example.invoice.Invoice invoice = invoiceService.findById(id);
-        System.out.println(invoice.getInvoiceNumber());
+        Invoice invoice = invoiceService.findById(id);
         invoiceService.delete(id);
+        return "redirect:/invoice/all";
+    }
+
+    @GetMapping("/block/{id}")
+    public String block(@PathVariable String username) {
+        User user = userServiceImpl.findByUserName(username);
+        user.setEnabled(0);
+        userServiceImpl.update(user);
         return "redirect:/invoice/all";
     }
 
