@@ -112,15 +112,17 @@ public class InvoiceController {
     }
 
     @GetMapping("/block/{id}")
-    public String block(@PathVariable int id, Model model) {
-       model.addAttribute("userBlock",userServiceImpl.findUserById(id));
+    public String block(@PathVariable Long id, Model model) {
+        System.out.println(invoiceService.findByUserId(id).getRoles());
+        model.addAttribute("userBlock", invoiceService.findByUserId(id));
+        System.out.println(invoiceService.findByUserId(id).getRoles());
         return "invoice/block";
     }
 
     @PostMapping("/block/{id}")
     public String block(User user) {
-      user.setEnabled(0);
-        userServiceImpl.update(user);
+//      user.setEnabled(0);
+        invoiceService.update(user);
         return "redirect:/invoice/all";
     }
 
@@ -155,14 +157,14 @@ public class InvoiceController {
         //-------File Replacer--------//
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
-        String fileInput = path.substring(0, path.length() - 1)+"/src/main/resources/"+ "Invoice-Template.docx";
+        String fileInput = path.substring(0, path.length() - 1) + "/src/main/resources/" + "Invoice-Template.docx";
         String input = fileInput;
-        String fileOutput = path.substring(0, path.length() - 1)+"/src/main/resources/"+ "final.docx";
+        String fileOutput = path.substring(0, path.length() - 1) + "/src/main/resources/" + "final.docx";
         String output = fileOutput;
         XWPFDocument doc = new XWPFDocument(
                 Files.newInputStream(Paths.get(input)));
         FileInvoice fileInvoice = new FileInvoice();
-        fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientName(),"xyz");
+        fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientName(), "xyz");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCompany(), "${company}");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCity(), "${city}");
         fileInvoice.updateDocument(doc, invoice.getRecipient().getRecipientCountry(), "${country}");
@@ -173,7 +175,7 @@ public class InvoiceController {
 
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName() + " / " + invoice.getSender().getOwnerName(), "${companyName}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyAdress(), "${companyAdress}");
-        fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName(),"companyName");
+        fileInvoice.updateDocument(doc, invoice.getSender().getCompanyName(), "companyName");
         fileInvoice.updateDocument(doc, invoice.getSender().getCity(), "${companyCity}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCountry(), "${companyCountry}");
         fileInvoice.updateDocument(doc, invoice.getSender().getCompanyPhone(), "${companyPhone}");

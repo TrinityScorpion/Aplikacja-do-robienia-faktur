@@ -46,8 +46,9 @@ public class UserController {
             userService.saveUser(user);
         }else{
             System.out.println("Password are not equals");
+            return "redirect:/user/create-user";
         }
-        return "redirect:/user/create-user";
+        return "redirect:/home";
     }
 
     @GetMapping("/admin")

@@ -30,6 +30,7 @@ public class InvoiceService {
         return userDao.getAll();
     }
 
+
     public void update(Invoice invoice){
         invoiceDao.update(invoice);
     }
@@ -37,6 +38,13 @@ public class InvoiceService {
         invoiceDao.delete(id);
     }
 
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    public User findByUserId(long id) {
+        return userDao.findById(id);
+    }
 
 
 }
