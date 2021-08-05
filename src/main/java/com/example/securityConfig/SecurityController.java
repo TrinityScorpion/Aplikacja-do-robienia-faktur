@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SecurityController {
 
     @GetMapping("/")
-    @ResponseBody
     public String home(){
-        return "home";
+        return "redirect:/home";
     }
 
     @GetMapping("/about")
