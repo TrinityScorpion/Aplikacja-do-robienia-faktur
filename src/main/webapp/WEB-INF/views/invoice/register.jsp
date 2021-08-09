@@ -135,6 +135,7 @@
                     </div>
                     <form:form method="post" modelAttribute="user">
                         <div><label> User Name : <form:input path="username"/> </label></div>
+                        <div><label> Email : <form:input path="email"/> </label></div>
                         <div><label> Password: <form:input path="password" type="password"/> </label></div>
                         <div><label> Confirm: <form:input path="confirmPassword" type="password"/> </label></div>
 <%--                        <div><label> Password Again: <input path="password1" type="password"/> </label></div>--%>

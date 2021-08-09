@@ -319,15 +319,21 @@
                     </div>
 
                     <div class="card-body">
+                        <a href="/invoice/all" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+                            <span class="text">Back</span>
+                        </a>
                         <form:form method="post" modelAttribute="invoice">
                             <form:input path="created" type="hidden"/><br>
                             <form:input path="deadline" type="hidden"/><br>
                             <form:input path="invoiceNumber" type="hidden"/><br>
-                            Salary: <form:input path="salary"/><br>
+                            Salary: <form:input path="salary" type="number"/><br>
                             <form:errors path="salary"/><br>
-                            Quantity: <form:input path="quantity"/><br>
+                            Quantity: <form:input path="quantity" type="number"/><br>
                             <form:errors path="quantity"/><br>
-                            Tax: <form:input path="tax"/>%<br>
+                            Tax: <form:input path="tax" type="number"/>%<br>
                             <form:errors path="tax"/><br>
                             Description: <form:input path="description"/><br>
                             <form:errors path="description"/><br>
@@ -335,10 +341,12 @@
                             <form:option value="0">---Choose Writer--</form:option>
                             <form:options items="${recipientList}" itemLabel="recipientCompany" itemValue="id"/>
                         </form:select><br>
+                            <form:errors path="recipient"/><br>
                            To: <form:select path="sender">
                             <form:option value="0">---Choose Sender--</form:option>
                             <form:options items="${senderList}" itemLabel="companyName" itemValue="id"/>
                         </form:select><br>
+                            <form:errors path="sender"/><br>
                             <input type="submit">
                         </form:form>
                     </div>

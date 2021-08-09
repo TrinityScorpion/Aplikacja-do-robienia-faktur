@@ -35,7 +35,7 @@ public class UserEmailService implements EmailSender{
     @Autowired
     private JavaMailSender mailSender;
 
-    public void register(User user, String siteURL)
+    public void register(User user, String siteURL, String toWho)
             throws UnsupportedEncodingException, MessagingException {
         String encodedPassword = passwordEncoder.encode("fsfsdf");
         user.setPassword(encodedPassword);
@@ -43,12 +43,12 @@ public class UserEmailService implements EmailSender{
         user.setUsername("Maniudsss");
         user.setEnabled(1);
 //        repo.save(user);
-        sendVerificationEmail(user, siteURL);
+        sendVerificationEmail(user, siteURL, toWho);
     }
 
-    private void sendVerificationEmail(User user, String siteURL)
+    private void sendVerificationEmail(User user, String siteURL, String toWho)
             throws MessagingException, UnsupportedEncodingException {
-        String toAddress = "mariusz.kepa.h3@wp.pl";
+        String toAddress = toWho;
         String fromAddress = "mariusz.kepa.h3@wp.pl";
         String senderName = "Your company name";
         String subject = "Please verify your registration";

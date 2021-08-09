@@ -133,11 +133,12 @@
 
                         <h6 class="m-0 font-weight-bold text-primary">Register new User</h6>
                     </div>
-                    <form:form method="post" modelAttribute="userBlock">
+                    <form:form method="post" modelAttribute="userEdit">
                         <div><label> User Name : <form:input path="username"/> </label></div>
                         <div><label> Password: <form:input path="password" type="password"/> </label></div>
 <%--                        <div><label> Password Again: <input path="password1" type="password"/> </label></div>--%>
-                                                <form:input path="enabled"/>
+                                                <form:input path="enabled" type="hidden"/>
+                                                <form:input path="roles" type="hidden"/>
                         <div><input type="submit" value="Block this User"/></div>
                         ---------------------------------
                     </form:form>

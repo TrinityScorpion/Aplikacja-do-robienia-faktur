@@ -1,6 +1,4 @@
 package com.example.invoice;
-
-
 import com.example.CodersLabLastProject.FileInvoice;
 import com.example.email.UserEmailService;
 import com.example.recipient.Recipient;
@@ -63,7 +61,6 @@ public class InvoiceController {
         String username = principal.getName();
         String[] getAdmin = userService.findByUserName(principal.getName()).getRoles().toString().split("=");
         String admin = getAdmin[2].substring(0, 10);
-        System.out.println(admin);
         model.addAttribute("admin", admin);
         model.addAttribute("username", username);
         model.addAttribute("invoiceList", invoiceService.getAll());
@@ -107,17 +104,44 @@ public class InvoiceController {
         return "redirect:/invoice/all";
     }
 
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        User user = invoiceService.findByUserId(id);
+        invoiceService.deleteUser(id);
+        return "redirect:/invoice/all";
+    }
+
     @GetMapping("/block/{id}")
-    public String block(@PathVariable Long id, Model model) {
-        System.out.println(invoiceService.findByUserId(id).getRoles());
-        model.addAttribute("userBlock", invoiceService.findByUserId(id));
-        System.out.println(invoiceService.findByUserId(id).getRoles());
+    public String block(@PathVariable Long id) {
+        User user = invoiceService.findByUserId(id);
+        user.setEnabled(0);
+        invoiceService.update(user);
+        return "redirect:/invoice/all";
+    }
+
+    @GetMapping("/unblock/{id}")
+    public String unblock(@PathVariable Long id) {
+        User user = invoiceService.findByUserId(id);
+        user.setEnabled(1);
+        invoiceService.update(user);
+        return "redirect:/invoice/all";
+    }
+//    @PostMapping("/block/{id}")
+//    public String block(User user) {
+//        user.setRoles(user.getRoles());
+//        invoiceService.update(user);
+//        return "redirect:/invoice/all";
+//    }
+
+    @GetMapping("/editUser/{id}")
+    public String editUser(@PathVariable Long id, Model model) {
+        model.addAttribute("userEdit", invoiceService.findByUserId(id));
         return "invoice/block";
     }
 
-    @PostMapping("/block/{id}")
-    public String block(User user) {
-//      user.setEnabled(0);
+    @PostMapping("/editUser/{id}")
+    public String editUser(User user) {
+        user.setRoles(user.getRoles());
         invoiceService.update(user);
         return "redirect:/invoice/all";
     }
@@ -192,8 +216,14 @@ public class InvoiceController {
     }
 
     @GetMapping("/email")
-    public String email(User user, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        userEmailService.register(user, getSiteURL(request));
+    public String email(User user, HttpServletRequest request, Principal principal) throws MessagingException, UnsupportedEncodingException {
+        List<User> users = invoiceService.getAllUsers();
+        for (int i = 0; i < invoiceService.getAllUsers().size(); i++) {
+            if(principal.getName().equals(users.get(i).getUsername())){
+                userEmailService.register(user, getSiteURL(request),users.get(i).getEmail());
+            }
+        }
+
 
         return "redirect:/invoice/all";
     }

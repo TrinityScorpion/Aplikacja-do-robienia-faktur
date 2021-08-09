@@ -274,12 +274,6 @@
                     </span>
                                     <span class="text">Add New User</span>
                                 </a>
-                                <a href="/sender/add" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-flag"></i>
-                    </span>
-                                    <span class="text">Add New Sender</span>
-                                </a>
                                 <div>
 
                                 </div>
@@ -310,9 +304,10 @@
                                                 <td>${user.username}</td>
                                                 <td>${user.enabled}</td>
                                                 <td>${user.roles}</td>
-                                                <td><a href="/invoice/edit/${user.id}">Edit</a> <a
-                                                        href="/invoice/delete/${user.id}">Delete</a> <a
-                                                        href="/invoice/block/${user.id}">Block User</a></td>
+                                                <td><a href="/invoice/editUser/${user.id}">Edit</a> <a
+                                                        href="/invoice/del/${usereteUser.id}">Delete</a> <a
+                                                        href="/invoice/block/${user.id}">Block</a> <a
+                                                        href="/invoice/unblock/${user.id}">Unblock</a></td>
 
                                             </tr>
                                     </c:forEach>

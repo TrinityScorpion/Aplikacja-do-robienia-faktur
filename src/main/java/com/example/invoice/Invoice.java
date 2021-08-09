@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +20,6 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank(message = "invoiceNumber.notBlank.message")
     @Column(length = 100)
     private String invoiceNumber;
 
@@ -27,18 +27,24 @@ public class Invoice {
 
     private LocalDate deadline;
 
+    @NotNull(message = "salary.notBlank.message")
     private int salary;
 
+    @NotNull(message = "invoice.quantity.notblank")
     private int quantity;
 
+    @NotNull(message = "invoice.tax.notblank")
     private int tax;
 
+    @NotBlank(message = "description.notBlank.message")
     private String description;
 
     @ManyToOne
+    @NotNull(message = "invoice.recipient.notblank")
     private Recipient recipient;
 
     @ManyToOne
+    @NotNull(message = "invoice.sender.notblank")
     private Sender sender;
 
     @ManyToOne

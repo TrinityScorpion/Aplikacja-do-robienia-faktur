@@ -58,7 +58,4 @@ public class UserServiceImpl implements UserService {
         userDao.update(user);
     }
 
-    public void delete(long id) {
-        userDao.delete(id);
-    }
 }

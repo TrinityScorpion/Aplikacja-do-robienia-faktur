@@ -37,6 +37,10 @@ public class InvoiceService {
     public void delete(Long id){
         invoiceDao.delete(id);
     }
+    public void deleteUser(Long id){
+        userDao.deleteUser(id);
+    }
+
 
     public void update(User user) {
         userDao.update(user);

@@ -26,7 +26,7 @@ public class UserDao {
     public void update(User user){
         entityManager.merge(user);
     }
-    public void delete(long id){
+    public void deleteUser(Long id){
         User user = findById(id);
         entityManager.remove(entityManager.contains(user) ? user:entityManager.merge(user));
     }
