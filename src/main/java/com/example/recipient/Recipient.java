@@ -17,19 +17,19 @@ public class Recipient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "recipientName.notBlank.message")
+    @NotBlank(message = "No recipient name")
     @Column(length = 100)
     private String recipientName;
 
-    @NotBlank(message = "recipientCompany.notBlank.message")
+    @NotBlank(message = "No company")
     @Column(length = 100)
     private String recipientCompany;
 
-    @NotBlank(message = "recipientCity.notBlank.message")
+    @NotBlank(message = "No city")
     @Column(length = 100)
     private String recipientCity;
 
-    @NotBlank(message = "recipientCountry.notBlank.message")
+    @NotBlank(message = "No country")
     @Column(length = 100)
     private String recipientCountry;
 }

@@ -348,7 +348,7 @@
                             <form:errors path="country"/><br>
                             Phone: <form:input path="companyPhone"/><br>
                             <form:errors path="companyPhone"/><br>
-                            <input type="submit">
+                            <input type="submit" value="Add Sender">
                         </form:form>
                     </div>
                 </div>

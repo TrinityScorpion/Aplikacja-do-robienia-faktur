@@ -4,12 +4,15 @@ import com.example.recipient.Recipient;
 import com.example.sender.Sender;
 import com.example.user.User;
 import lombok.Data;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+//@ExceptionHandler(MethodArgumentNotValidException)
 @Entity
 @Table(name = Invoice.TABLE_NAME)
 @Data
@@ -27,29 +30,27 @@ public class Invoice {
 
     private LocalDate deadline;
 
-    @NotNull(message = "salary.notBlank.message")
+    @Min(value = 1, message = "Salary should be bigger than 1")
     private int salary;
 
-    @NotNull(message = "invoice.quantity.notblank")
+    @Min(value = 1, message = "Quantity should be bigger than 1")
     private int quantity;
 
-    @NotNull(message = "invoice.tax.notblank")
+    @Min(value = 1, message = "Tax should be bigger than 1")
     private int tax;
 
-    @NotBlank(message = "description.notBlank.message")
+    @NotBlank(message = "No description")
     private String description;
 
     @ManyToOne
-    @NotNull(message = "invoice.recipient.notblank")
+    @NotNull(message = "Choose recipient")
     private Recipient recipient;
 
     @ManyToOne
-    @NotNull(message = "invoice.sender.notblank")
+    @NotNull(message = "Choose Sender")
     private Sender sender;
 
     @ManyToOne
     private User user;
-
-
 
 }

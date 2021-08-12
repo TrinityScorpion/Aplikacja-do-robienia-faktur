@@ -15,27 +15,27 @@ public class Sender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "ownerName.notBlank.message")
+    @NotBlank(message ="No owner name")
     @Column(length = 100)
     private String ownerName;
 
-    @NotBlank(message = "companyName.notBlank.message")
+    @NotBlank(message = "No company name")
     @Column(length = 100)
     private String companyName;
 
-    @NotBlank(message = "companyAdress.notBlank.message")
+    @NotBlank(message = "No company adress")
     @Column(length = 100)
     private String companyAdress;
 
-    @NotBlank(message = "city.notBlank.message")
+    @NotBlank(message = "No city")
     @Column(length = 100)
     private String city;
 
-    @NotBlank(message = "country.notBlank.message")
+    @NotBlank(message = "No country")
     @Column(length = 100)
     private String country;
 
-    @NotBlank(message = "companyPhone.notBlank.message")
+    @NotBlank(message = "No company phone")
     @Column(length = 100)
     private String companyPhone;
 

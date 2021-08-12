@@ -16,17 +16,13 @@
 
     <title>SB Admin 2 - Tables</title>
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
-
+    <!-- Moje Własne-->
+<%--    <script src="/js/formRedError.js" defer>--%>
+<%--    <script type="/text/javascript" th:src="@{js/formRedError.js}"></script>--%>
+<%--    <script type="/text/javascript" th:src="js/formRedError.js"></script>--%>
+<%--    <link href="<c:url value="/WEB-INF/views/invoice/js/formRedError.js"/>" rel="stylesheet">--%>
     <!-- Custom styles for this template -->
     <link href="<c:url value="/theme/css/sb-admin-2.css"/>" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -319,17 +315,17 @@
                     </div>
 
                     <div class="card-body">
-                        <a href="/invoice/all" class="btn btn-primary btn-icon-split">
+                        <a href="/invoice/all" class="btn btn-primary btn-icon-split" id="redForm">
                     <span class="icon text-white-50">
                       <i class="fas fa-flag"></i>
                     </span>
                             <span class="text">Back</span>
                         </a>
-                        <form:form method="post" modelAttribute="invoice">
+                        <form:form method="post" modelAttribute="invoice" id="redForm">
                             <form:input path="created" type="hidden"/><br>
                             <form:input path="deadline" type="hidden"/><br>
                             <form:input path="invoiceNumber" type="hidden"/><br>
-                            Salary: <form:input path="salary" type="number"/><br>
+                            Salary: <form:input path="salary" /><br>
                             <form:errors path="salary"/><br>
                             Quantity: <form:input path="quantity" type="number"/><br>
                             <form:errors path="quantity"/><br>
@@ -347,7 +343,7 @@
                             <form:options items="${senderList}" itemLabel="companyName" itemValue="id"/>
                         </form:select><br>
                             <form:errors path="sender"/><br>
-                            <input type="submit">
+                            <input type="submit" value="Add Invoice">
                         </form:form>
                     </div>
                 </div>
@@ -388,23 +384,8 @@
         </div>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
+<!-- Moje Własne-->
+<script src="/js/redFormError.js"></script>
 
 </body>
 

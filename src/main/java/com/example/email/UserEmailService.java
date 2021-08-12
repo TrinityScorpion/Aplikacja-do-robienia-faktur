@@ -51,7 +51,7 @@ public class UserEmailService implements EmailSender{
         String toAddress = toWho;
         String fromAddress = "mariusz.kepa.h3@wp.pl";
         String senderName = "Your company name";
-        String subject = "Please verify your registration";
+        String subject = "Attachment from Invoice-App/Mariusz";
         String content = "Dear [[name]],<br>"
                 + "Please click the link below to verify your registration:<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"

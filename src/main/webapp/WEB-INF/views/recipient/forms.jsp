@@ -346,7 +346,7 @@
                             <form:errors path="recipientCity"/><br>
                             Country: <form:input path="recipientCountry"/><br>
                             <form:errors path="recipientCountry"/><br>
-                            <input type="submit">
+                            <input type="submit" value="Add Recipient">
                         </form:form>
                     </div>
                 </div>

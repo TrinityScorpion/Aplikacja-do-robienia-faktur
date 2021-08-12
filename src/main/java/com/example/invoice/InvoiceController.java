@@ -70,10 +70,9 @@ public class InvoiceController {
 
     @GetMapping("/add")
     public String add(Model model, Principal principal) {
-        Invoice invoice = new com.example.invoice.Invoice();
         String username = principal.getName();
         model.addAttribute("username", username);
-        model.addAttribute("invoice", invoice);
+        model.addAttribute("invoice", new Invoice());
         return "/invoice/forms";
     }
 
