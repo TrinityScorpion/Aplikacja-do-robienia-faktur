@@ -86,7 +86,8 @@ public class InvoiceController {
         Random rand = new Random();
         int number = rand.nextInt(100000);
         invoice.setCreated(LocalDate.now());
-        invoice.setDeadline(LocalDate.of(2021, 07, 30));
+//        invoice.setDeadline(LocalDate.of(2021, 07, 30));
+        invoice.setDeadline(LocalDate.now().plusDays(7));
         invoice.setUser(userService.findByUserName(principal.getName()));
         String invoiceNumber1 = number + "_" + LocalDate.now().getYear()
                 + LocalDate.now().getMonthValue()
@@ -152,7 +153,8 @@ public class InvoiceController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(Invoice invoice) {
+    public String edit(@PathVariable Long id, Invoice invoice, Principal principal) {
+        invoice.setUser(userService.findByUserName(principal.getName()));
         invoice.setCreated(LocalDate.now());
         invoiceService.update(invoice);
         return "redirect:/invoice/all";

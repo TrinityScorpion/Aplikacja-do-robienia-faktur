@@ -127,7 +127,7 @@
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Registration</h1>
 
-                <!-- DataTales Example -->
+                <!-- DataTales Examplcripe -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
 
@@ -135,8 +135,11 @@
                     </div>
                     <form:form method="post" modelAttribute="user">
                         <div><label> User Name : <form:input path="username"/> </label></div>
+                                              <form:errors path="username"/><br>
                         <div><label> Email : <form:input path="email"/> </label></div>
+                                             <form:errors path="email"/><br>
                         <div><label> Password: <form:input path="password" type="password"/> </label></div>
+                                              <form:errors path="password"/><br>
                         <div><label> Confirm: <form:input path="confirmPassword" type="password"/> </label></div>
 <%--                        <div><label> Password Again: <input path="password1" type="password"/> </label></div>--%>
                                                 <form:input path="enabled" type="hidden"/>

@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import java.util.Set;
 
 @Entity
@@ -19,9 +20,10 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 60)
     private String username;
+
     private String password;
 
-    @Email
+    @Email(message = "Insert correct email")
     private String email;
 
     @Transient

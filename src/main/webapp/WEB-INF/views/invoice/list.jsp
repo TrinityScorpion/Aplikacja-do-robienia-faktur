@@ -305,7 +305,7 @@
                                                 <td>${user.enabled}</td>
                                                 <td>${user.roles}</td>
                                                 <td><a href="/invoice/editUser/${user.id}">Edit</a> <a
-                                                        href="/invoice/del/${usereteUser.id}">Delete</a> <a
+                                                        href="/invoice/deleteUser/${user.id}">Delete</a> <a
                                                         href="/invoice/block/${user.id}">Block</a> <a
                                                         href="/invoice/unblock/${user.id}">Unblock</a></td>
 
