@@ -65,7 +65,7 @@ public class InvoiceController {
         model.addAttribute("username", username);
         model.addAttribute("invoiceList", invoiceService.getAll());
         model.addAttribute("userId", userService.findByUserName(principal.getName()).getId());
-        return "/invoice/list";
+        return username;
     }
 
     @GetMapping("/add")
